@@ -4,6 +4,7 @@ use crate::{Cheatcode, Cheatcodes, Result, Vm::*};
 use alloy_dyn_abi::{DynSolType, DynSolValue};
 use alloy_primitives::U256;
 use alloy_sol_types::SolValue;
+use rand::Rng;
 
 // address
 impl Cheatcode for toString_0Call {
@@ -141,6 +142,17 @@ impl Cheatcode for indexOfCall {
     fn apply(&self, _state: &mut Cheatcodes) -> Result {
         let Self { input, key } = self;
         Ok(input.find(key).map(U256::from).unwrap_or(U256::MAX).abi_encode())
+    }
+}
+
+// random
+impl Cheatcode for randomCall {
+    fn apply(&self, _state: &mut Cheatcodes) -> Result {
+        let mut rng = rand::thread_rng();
+
+        // // Generate a random number in the range [50, 150)
+        let random_number: u32 = rng.gen_range(50..150); // just for testing
+        Ok(random_number.abi_encode())
     }
 }
 
