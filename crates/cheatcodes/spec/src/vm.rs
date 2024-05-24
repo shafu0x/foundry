@@ -1774,6 +1774,9 @@ interface Vm {
     #[cheatcode(group = String)]
     function indexOf(string calldata input, string calldata key) external pure returns (uint256);
 
+    #[cheatcode(group = String, status = Experimental)]
+    function random() external pure returns (uint256 parsedValue);
+
     // ======== JSON Parsing and Manipulation ========
 
     // -------- Reading --------
